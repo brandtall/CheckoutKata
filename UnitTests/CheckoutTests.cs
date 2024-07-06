@@ -96,6 +96,28 @@ public class Tests
         Assert.That(total, Is.EqualTo(200+45+30+40));
     }
     
+    [Test]
+    public void ShouldReturnTotal_WithMultipleOffers_WhereOffersAreAppliedMultipleTimes()
+    {
+        Dictionary<string, Dictionary<int, double>>? offers = new Dictionary<string, Dictionary<int, double>>();
+
+        offers.Add("A", new Dictionary<int, double>(){{3, 130}, {5, 200}});
+        offers.Add("B", new Dictionary<int, double>(){{2, 45}, {4, 65}});
+        
+        var cart = new List<Item>
+        {
+            new("A", 50, 15),
+            new("B", 30, 6),
+            new("C", 20, 2)
+        };
+        
+        var sut = new Checkout(offers, cart);
+        var total = sut.Total;
+        
+        
+        Assert.That(total, Is.EqualTo(200+200+200+45+65+40));
+    }
+    
 }
 
 public class Item(string sku, double price, int quantity)
@@ -133,8 +155,14 @@ public class Checkout
     private void ApplyOffer(Dictionary<string, Dictionary<int, double>> offers,
         Item item)
     {
-        if (!offers.TryGetValue(item.Sku, out var offer)) return;
-        var offerQuantity = offer.Where(o => o.Key <= item.Quantity).MaxBy(o => o.Key).Key;
-        Total -= offerQuantity*item.Price - offers[item.Sku][offerQuantity];
+        if (!offers.TryGetValue(item.Sku, out var itemLevelOffers)) return;
+        var itemQuantity = item.Quantity;
+        var minOfferQuantity = itemLevelOffers.Where(o => o.Key <= itemQuantity).MinBy(o => o.Key).Key;
+        while (itemQuantity >= minOfferQuantity)
+        {
+            var offerQuantity = itemLevelOffers.Where(o => o.Key <= itemQuantity).MaxBy(o => o.Key).Key;
+            itemQuantity -= offerQuantity;
+            Total -= offerQuantity*item.Price - offers[item.Sku][offerQuantity];
+        }
     }
 }
