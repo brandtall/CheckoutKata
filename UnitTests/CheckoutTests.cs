@@ -149,6 +149,18 @@ public class Checkout
         {
             CalculateTotal(offers, item, items[item.Key]);
         }
+
+        if (cart == null) return;
+
+        _sum = 0;
+        
+        foreach (var item in cart)
+        {
+            int quantity = item.Quantity;
+            var itemPrice = item.Price;
+            _sum += quantity * itemPrice;
+            ApplyOffer(offers, item.SKU, quantity, itemPrice);
+        }
     }
 
     private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, KeyValuePair<string, double> item, int quantity)
