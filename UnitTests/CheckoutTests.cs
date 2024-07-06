@@ -8,7 +8,9 @@ public class Tests
         Dictionary<string, double> pricing = new Dictionary<string, double>();
         Dictionary<string, int>? items = new Dictionary<string, int>();
         
-        var sut = new Checkout(items, pricing, null, null);
+        var cart = new List<Item>();
+        
+        var sut = new Checkout(items, pricing, null, cart);
         var total = sut.Total();
         
         
@@ -60,7 +62,14 @@ public class Tests
         items.Add("B", 2);
         items.Add("C", 1);
         
-        var sut = new Checkout(items, pricing, offers, null);
+        var cart = new List<Item>
+        {
+            new Item("A", 50, 3),
+            new Item("B", 30, 2),
+            new Item("C", 20, 1)
+        };
+        
+        var sut = new Checkout(items, pricing, offers, cart);
         var total = sut.Total();
         
         
@@ -85,7 +94,14 @@ public class Tests
         items.Add("B", 3);
         items.Add("C", 2);
         
-        var sut = new Checkout(items, pricing, offers, null);
+        var cart = new List<Item>
+        {
+            new Item("A", 50, 4),
+            new Item("B", 30, 3),
+            new Item("C", 20, 2)
+        };
+        
+        var sut = new Checkout(items, pricing, offers, cart);
         var total = sut.Total();
         
         
@@ -110,7 +126,14 @@ public class Tests
         items.Add("B", 3);
         items.Add("C", 2);
         
-        var sut = new Checkout(items, pricing, offers, null);
+        var cart = new List<Item>
+        {
+            new Item("A", 50, 5),
+            new Item("B", 30, 3),
+            new Item("C", 20, 2)
+        };
+        
+        var sut = new Checkout(items, pricing, offers, cart);
         var total = sut.Total();
         
         
