@@ -170,7 +170,8 @@ public class Checkout
         
         foreach (var item in pricing)
         {
-            CalculateTotal(offers, item, items[item.Key]);
+            var quantity = items[item.Key];
+            CalculateTotal(offers, quantity, item.Value, item.Key);
         }
 
         if (cart == null) return;
@@ -179,18 +180,15 @@ public class Checkout
         
         foreach (var item in cart)
         {
-            int quantity = item.Quantity;
-            var itemPrice = item.Price;
-            _sum += quantity * itemPrice;
-            ApplyOffer(offers, item.Sku, quantity, itemPrice);
+            var quantity = item.Quantity;
+            CalculateTotal(offers, quantity, item.Price, item.Sku);
         }
     }
 
-    private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, KeyValuePair<string, double> item, int quantity)
+    private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, int quantity, double itemPrice, string itemSku)
     {
-        var itemPrice = item.Value;
         _sum += quantity * itemPrice;
-        ApplyOffer(offers, item.Key, quantity, itemPrice);
+        ApplyOffer(offers, itemSku, quantity, itemPrice);
     }
 
     private void ApplyOffer(Dictionary<string, Dictionary<int, double>> offers, string sku, int quantity, double itemPrice)
