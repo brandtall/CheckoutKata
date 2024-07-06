@@ -128,11 +128,9 @@ public class Checkout
             var quantity = items[sku];
             var itemPrice = item.Value;
             _sum += quantity * itemPrice;
-            if (offers.ContainsKey(sku))
-            {
-                var offerQuantity = offers[sku].Where(o => o.Key <= quantity).MaxBy(o => o.Key).Key; 
-                _sum -= offerQuantity*itemPrice - offers[sku][offerQuantity];
-            }
+            if (!offers.ContainsKey(sku)) continue;
+            var offerQuantity = offers[sku].Where(o => o.Key <= quantity).MaxBy(o => o.Key).Key; 
+            _sum -= offerQuantity*itemPrice - offers[sku][offerQuantity];
         }
     }
 
