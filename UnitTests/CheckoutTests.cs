@@ -171,8 +171,7 @@ public class Checkout
         
         foreach (var item in cart)
         {
-            var quantity = item.Quantity;
-            CalculateTotal(offers, quantity, item.Price, item.Sku);
+            CalculateTotal(offers, item.Quantity, item.Price, item.Sku);
         }
     }
 
