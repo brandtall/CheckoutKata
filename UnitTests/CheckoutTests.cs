@@ -61,6 +61,31 @@ public class Tests
         Assert.That(total, Is.EqualTo(130+45+20));
     }
     
+    [Test]
+    public void ShouldReturnTotal_WithOneOffers_And_QuantityIsHigherThanOffer()
+    {
+        Dictionary<string, double>? pricing = new Dictionary<string, double>();
+        Dictionary<string, Dictionary<int, double>>? offers = new Dictionary<string, Dictionary<int, double>>();
+        Dictionary<string, int>? items = new Dictionary<string, int>();
+        
+        pricing.Add("A", 50);
+        pricing.Add("B", 30);
+        pricing.Add("C", 20);
+        
+        offers.Add("A", new Dictionary<int, double>(){{3, 130}});
+        offers.Add("B", new Dictionary<int, double>(){{2, 45}});
+        
+        items.Add("A", 4);
+        items.Add("B", 3);
+        items.Add("C", 2);
+        
+        var sut = new Checkout(items, pricing, offers);
+        var total = sut.Total();
+        
+        
+        Assert.That(total, Is.EqualTo(130+50+30+45+40));
+    }
+    
 }
 
 public class Checkout
@@ -77,15 +102,12 @@ public class Checkout
             var sku = item.Key;
             var quantity = items[sku];
             var itemPrice = item.Value;
+            _sum += quantity * itemPrice;
             if (offers.ContainsKey(sku))
             {
-                _sum += offers[sku].ContainsKey(quantity) ? offers[sku][quantity] : itemPrice;
+                var offerQuantity = offers[sku].FirstOrDefault(o => o.Key <= quantity).Key; 
+                _sum -= offerQuantity*itemPrice - offers[sku][offerQuantity];
             }
-            else
-            {
-                _sum += quantity * itemPrice;
-            }
-
         }
     }
 
