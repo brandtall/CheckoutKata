@@ -3,7 +3,7 @@ namespace UnitTests;
 public class Tests
 {
     [Test]
-    public void ShouldReturnTotal_NoOFfers()
+    public void ShouldReturnTotal_NoOffers()
     {
         var sut = new Checkout();
 
