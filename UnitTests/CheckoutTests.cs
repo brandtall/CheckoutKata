@@ -42,9 +42,9 @@ public class Tests
         var item2 = new Item("B", 30, 2);
         var item3 = new Item("C", 20, 1);
 
-        new Offer(item1, 3, 130);
-        
-        
+        var offer = new Offer(item1, 3, 130);
+
+
         var cart = new List<Item>
         {
             item1,
