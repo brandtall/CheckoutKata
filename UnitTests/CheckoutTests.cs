@@ -146,12 +146,12 @@ public class Item
 {
     public Item(string sku, double price, int quantity)
     {
-        SKU = sku;
+        Sku = sku;
         Price = price;
         Quantity = quantity;
     }
 
-    public string SKU { get; set; }
+    public string Sku { get; set; }
     
     public double Price { get; set; }
     
@@ -182,7 +182,7 @@ public class Checkout
             int quantity = item.Quantity;
             var itemPrice = item.Price;
             _sum += quantity * itemPrice;
-            ApplyOffer(offers, item.SKU, quantity, itemPrice);
+            ApplyOffer(offers, item.Sku, quantity, itemPrice);
         }
     }
 
