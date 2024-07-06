@@ -134,10 +134,7 @@ public class Checkout
         Item item)
     {
         if (!offers.TryGetValue(item.Sku, out var offer)) return;
-        var offerQuantity = offer.Where(o =>
-        {
-            return o.Key <= item.Quantity;
-        }).MaxBy(o => o.Key).Key;
+        var offerQuantity = offer.Where(o => o.Key <= item.Quantity).MaxBy(o => o.Key).Key;
         Total -= offerQuantity*item.Price - offers[item.Sku][offerQuantity];
     }
 }
