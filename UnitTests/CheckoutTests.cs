@@ -120,20 +120,24 @@ public class Checkout
         
         foreach (var item in cart)
         {
-            CalculateTotal(offers, item.Quantity, item.Price, item.Sku);
+            CalculateTotal(offers, item);
         }
     }
 
-    private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, int quantity, double price, string itemSku)
+    private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, Item item)
     {
-        Total += quantity * price;
-        ApplyOffer(offers, itemSku, quantity, price);
+        Total += item.Quantity * item.Price;
+        ApplyOffer(offers, item);
     }
 
-    private void ApplyOffer(Dictionary<string, Dictionary<int, double>> offers, string sku, int quantity, double price)
+    private void ApplyOffer(Dictionary<string, Dictionary<int, double>> offers,
+        Item item)
     {
-        if (!offers.TryGetValue(sku, out var offer)) return;
-        var offerQuantity = offer.Where(o => o.Key <= quantity).MaxBy(o => o.Key).Key; 
-        Total -= offerQuantity*price - offers[sku][offerQuantity];
+        if (!offers.TryGetValue(item.Sku, out var offer)) return;
+        var offerQuantity = offer.Where(o =>
+        {
+            return o.Key <= item.Quantity;
+        }).MaxBy(o => o.Key).Key;
+        Total -= offerQuantity*item.Price - offers[item.Sku][offerQuantity];
     }
 }
