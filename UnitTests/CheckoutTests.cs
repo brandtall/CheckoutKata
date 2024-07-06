@@ -142,20 +142,13 @@ public class Tests
     
 }
 
-public class Item
+public class Item(string sku, double price, int quantity)
 {
-    public Item(string sku, double price, int quantity)
-    {
-        Sku = sku;
-        Price = price;
-        Quantity = quantity;
-    }
+    public string Sku { get; set; } = sku;
 
-    public string Sku { get; set; }
-    
-    public double Price { get; set; }
-    
-    public int Quantity { get; set; }
+    public double Price { get; set; } = price;
+
+    public int Quantity { get; set; } = quantity;
 }
 
 public class Checkout
