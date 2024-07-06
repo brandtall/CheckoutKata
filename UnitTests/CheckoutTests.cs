@@ -8,7 +8,7 @@ public class Tests
         Dictionary<string, double> pricing = new Dictionary<string, double>();
         Dictionary<string, int>? items = new Dictionary<string, int>();
         
-        var sut = new Checkout(items, pricing);
+        var sut = new Checkout(items, pricing, null);
         var total = sut.Total();
         
         
@@ -30,7 +30,7 @@ public class Tests
         items.Add("C", 1);
         
         
-        var sut = new Checkout(items, pricing);
+        var sut = new Checkout(items, pricing, null);
         var total = sut.Total();
         
         
@@ -66,15 +66,6 @@ public class Tests
 public class Checkout
 {
     private readonly double _sum;
-
-    public Checkout(Dictionary<string, int>? items, Dictionary<string, double>? pricing)
-    {
-        if (pricing is null || items is null) return;
-        foreach (var item in pricing)
-        {
-            _sum += items[item.Key]*item.Value;
-        }
-    }
 
     public Checkout(Dictionary<string, int>? items, Dictionary<string, double>? pricing, Dictionary<string, Dictionary<int, double>>? offers)
     {
