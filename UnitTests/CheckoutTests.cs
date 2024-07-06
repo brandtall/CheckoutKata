@@ -10,7 +10,7 @@ public class Tests
         
         var cart = new List<Item>();
         
-        var sut = new Checkout(items, pricing, null, cart);
+        var sut = new Checkout(null, cart);
         var total = sut.Total();
         
         
@@ -38,7 +38,7 @@ public class Tests
             new Item("C", 8.2, 1)
         };
 
-        var sut = new Checkout(items, pricing, null, cart);
+        var sut = new Checkout(null, cart);
         var total = sut.Total();
         
         
@@ -69,7 +69,7 @@ public class Tests
             new Item("C", 20, 1)
         };
         
-        var sut = new Checkout(items, pricing, offers, cart);
+        var sut = new Checkout(offers, cart);
         var total = sut.Total();
         
         
@@ -101,7 +101,7 @@ public class Tests
             new Item("C", 20, 2)
         };
         
-        var sut = new Checkout(items, pricing, offers, cart);
+        var sut = new Checkout(offers, cart);
         var total = sut.Total();
         
         
@@ -133,7 +133,7 @@ public class Tests
             new Item("C", 20, 2)
         };
         
-        var sut = new Checkout(items, pricing, offers, cart);
+        var sut = new Checkout(offers, cart);
         var total = sut.Total();
         
         
@@ -162,18 +162,9 @@ public class Checkout
 {
     private double _sum;
 
-    public Checkout(Dictionary<string, int>? items, Dictionary<string, double>? pricing,
-        Dictionary<string, Dictionary<int, double>>? offers, List<Item>? cart)
+    public Checkout(Dictionary<string, Dictionary<int, double>>? offers, List<Item>? cart)
     {
-        if (pricing is null || items is null) return;
         offers ??= new Dictionary<string, Dictionary<int, double>>();
-        //
-        // foreach (var item in pricing)
-        // {
-        //     var quantity = items[item.Key];
-        //     CalculateTotal(offers, quantity, item.Value, item.Key);
-        // }
-
         if (cart == null) return;
 
         _sum = 0;
