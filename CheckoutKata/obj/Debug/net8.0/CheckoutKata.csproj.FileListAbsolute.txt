@@ -1,0 +1,14 @@
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/bin/Debug/net8.0/CheckoutKata
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/bin/Debug/net8.0/CheckoutKata.deps.json
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/bin/Debug/net8.0/CheckoutKata.runtimeconfig.json
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/bin/Debug/net8.0/CheckoutKata.dll
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/bin/Debug/net8.0/CheckoutKata.pdb
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/CheckoutKata.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/CheckoutKata.AssemblyInfoInputs.cache
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/CheckoutKata.AssemblyInfo.cs
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/CheckoutKata.csproj.CoreCompileInputs.cache
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/CheckoutKata.dll
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/refint/CheckoutKata.dll
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/CheckoutKata.pdb
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/CheckoutKata.genruntimeconfig.cache
+/Users/yahyayusuf/RiderProjects/CheckoutKata/CheckoutKata/obj/Debug/net8.0/ref/CheckoutKata.dll
