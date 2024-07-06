@@ -115,7 +115,7 @@ public class Tests
 
 public class Checkout
 {
-    private readonly double _sum;
+    private double _sum;
 
     public Checkout(Dictionary<string, int>? items, Dictionary<string, double>? pricing, Dictionary<string, Dictionary<int, double>>? offers)
     {
@@ -124,14 +124,22 @@ public class Checkout
         
         foreach (var item in pricing)
         {
-            var sku = item.Key;
-            var quantity = items[sku];
-            var itemPrice = item.Value;
-            _sum += quantity * itemPrice;
-            if (!offers.TryGetValue(sku, out var offer)) continue;
-            var offerQuantity = offer.Where(o => o.Key <= quantity).MaxBy(o => o.Key).Key; 
-            _sum -= offerQuantity*itemPrice - offers[sku][offerQuantity];
+            CalculateTotal(offers, item, items[item.Key]);
         }
+    }
+
+    private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, KeyValuePair<string, double> item, int quantity)
+    {
+        var itemPrice = item.Value;
+        _sum += quantity * itemPrice;
+        ApplyOffer(offers, item.Key, quantity, itemPrice);
+    }
+
+    private void ApplyOffer(Dictionary<string, Dictionary<int, double>> offers, string sku, int quantity, double itemPrice)
+    {
+        if (!offers.TryGetValue(sku, out var offer)) return;
+        var offerQuantity = offer.Where(o => o.Key <= quantity).MaxBy(o => o.Key).Key; 
+        _sum -= offerQuantity*itemPrice - offers[sku][offerQuantity];
     }
 
     public double Total()
