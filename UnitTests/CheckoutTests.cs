@@ -8,7 +8,7 @@ public class Tests
         Dictionary<string, double> pricing = new Dictionary<string, double>();
         Dictionary<string, int>? items = new Dictionary<string, int>();
         
-        var sut = new Checkout(items, pricing, null);
+        var sut = new Checkout(items, pricing, null, null);
         var total = sut.Total();
         
         
@@ -29,9 +29,13 @@ public class Tests
         items.Add("B", 1);
         items.Add("C", 1);
 
-        var item = new Item("A", 4, 1);
+        var cart = new List<Item>();
+        
+        cart.Add(new Item("A", 4, 1));
+        cart.Add(new Item("B", 6, 1));
+        cart.Add(new Item("C", 8.2, 1));
 
-        var sut = new Checkout(items, pricing, null);
+        var sut = new Checkout(items, pricing, null, cart);
         var total = sut.Total();
         
         
@@ -55,7 +59,7 @@ public class Tests
         items.Add("B", 2);
         items.Add("C", 1);
         
-        var sut = new Checkout(items, pricing, offers);
+        var sut = new Checkout(items, pricing, offers, null);
         var total = sut.Total();
         
         
@@ -80,7 +84,7 @@ public class Tests
         items.Add("B", 3);
         items.Add("C", 2);
         
-        var sut = new Checkout(items, pricing, offers);
+        var sut = new Checkout(items, pricing, offers, null);
         var total = sut.Total();
         
         
@@ -105,7 +109,7 @@ public class Tests
         items.Add("B", 3);
         items.Add("C", 2);
         
-        var sut = new Checkout(items, pricing, offers);
+        var sut = new Checkout(items, pricing, offers, null);
         var total = sut.Total();
         
         
@@ -134,7 +138,8 @@ public class Checkout
 {
     private double _sum;
 
-    public Checkout(Dictionary<string, int>? items, Dictionary<string, double>? pricing, Dictionary<string, Dictionary<int, double>>? offers)
+    public Checkout(Dictionary<string, int>? items, Dictionary<string, double>? pricing,
+        Dictionary<string, Dictionary<int, double>>? offers, List<Item> cart)
     {
         if (pricing is null || items is null) return;
         if (offers is null) offers = new Dictionary<string, Dictionary<int, double>>();
