@@ -26,11 +26,11 @@ public class Checkout
 
     public Checkout(Dictionary<string,double>? pricing)
     {
-        if (pricing != null)
-            foreach (var price in pricing.Values)
-            {
-                _sum += price;
-            }
+        if (pricing == null) return;
+        foreach (var price in pricing.Values)
+        {
+            _sum += price;
+        }
     }
 
     public double Total()
