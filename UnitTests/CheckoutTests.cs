@@ -11,7 +11,7 @@ public class Tests
         var cart = new List<Item>();
         
         var sut = new Checkout(null, cart);
-        var total = sut.Total();
+        var total = sut.Total;
         
         
         Assert.That(total, Is.EqualTo(0));
@@ -39,7 +39,7 @@ public class Tests
         };
 
         var sut = new Checkout(null, cart);
-        var total = sut.Total();
+        var total = sut.Total;
         
         
         Assert.That(total, Is.EqualTo(4 + 6 + 8.2));
@@ -70,7 +70,7 @@ public class Tests
         };
         
         var sut = new Checkout(offers, cart);
-        var total = sut.Total();
+        var total = sut.Total;
         
         
         Assert.That(total, Is.EqualTo(130+45+20));
@@ -102,7 +102,7 @@ public class Tests
         };
         
         var sut = new Checkout(offers, cart);
-        var total = sut.Total();
+        var total = sut.Total;
         
         
         Assert.That(total, Is.EqualTo(130+50+30+45+40));
@@ -134,7 +134,7 @@ public class Tests
         };
         
         var sut = new Checkout(offers, cart);
-        var total = sut.Total();
+        var total = sut.Total;
         
         
         Assert.That(total, Is.EqualTo(200+45+30+40));
@@ -160,14 +160,14 @@ public class Item
 
 public class Checkout
 {
-    private double _sum;
+    public double Total { get; private set; }
 
     public Checkout(Dictionary<string, Dictionary<int, double>>? offers, List<Item>? cart)
     {
         offers ??= new Dictionary<string, Dictionary<int, double>>();
         if (cart == null) return;
 
-        _sum = 0;
+        Total = 0;
         
         foreach (var item in cart)
         {
@@ -177,7 +177,7 @@ public class Checkout
 
     private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, int quantity, double price, string itemSku)
     {
-        _sum += quantity * price;
+        Total += quantity * price;
         ApplyOffer(offers, itemSku, quantity, price);
     }
 
@@ -185,11 +185,6 @@ public class Checkout
     {
         if (!offers.TryGetValue(sku, out var offer)) return;
         var offerQuantity = offer.Where(o => o.Key <= quantity).MaxBy(o => o.Key).Key; 
-        _sum -= offerQuantity*price - offers[sku][offerQuantity];
-    }
-
-    public double Total()
-    {
-        return _sum;
+        Total -= offerQuantity*price - offers[sku][offerQuantity];
     }
 }
