@@ -175,17 +175,17 @@ public class Checkout
         }
     }
 
-    private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, int quantity, double itemPrice, string itemSku)
+    private void CalculateTotal(Dictionary<string, Dictionary<int, double>> offers, int quantity, double price, string itemSku)
     {
-        _sum += quantity * itemPrice;
-        ApplyOffer(offers, itemSku, quantity, itemPrice);
+        _sum += quantity * price;
+        ApplyOffer(offers, itemSku, quantity, price);
     }
 
-    private void ApplyOffer(Dictionary<string, Dictionary<int, double>> offers, string sku, int quantity, double itemPrice)
+    private void ApplyOffer(Dictionary<string, Dictionary<int, double>> offers, string sku, int quantity, double price)
     {
         if (!offers.TryGetValue(sku, out var offer)) return;
         var offerQuantity = offer.Where(o => o.Key <= quantity).MaxBy(o => o.Key).Key; 
-        _sum -= offerQuantity*itemPrice - offers[sku][offerQuantity];
+        _sum -= offerQuantity*price - offers[sku][offerQuantity];
     }
 
     public double Total()
