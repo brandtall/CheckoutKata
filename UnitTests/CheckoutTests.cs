@@ -18,6 +18,18 @@ public class Tests
         Assert.That(total, Is.EqualTo(4 + 6 + 8.2));
     }
     
+    [Test]
+    public void ShouldReturnZero_WhenNoPricesAreSet()
+    {
+        Dictionary<string, double> pricing = new Dictionary<string, double>();
+        
+        var sut = new Checkout(pricing);
+        var total = sut.Total();
+        
+        
+        Assert.That(total, Is.EqualTo(0));
+    }
+    
 }
 
 public class Checkout
