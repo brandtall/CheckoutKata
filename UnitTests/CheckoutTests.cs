@@ -5,9 +5,6 @@ public class Tests
     [Test]
     public void ShouldReturnZero_WhenNoPricesAreSet()
     {
-        Dictionary<string, double> pricing = new Dictionary<string, double>();
-        Dictionary<string, int>? items = new Dictionary<string, int>();
-        
         var cart = new List<Item>();
         
         var sut = new Checkout(null, cart);
@@ -20,17 +17,6 @@ public class Tests
     [Test]
     public void ShouldReturnTotal_WithNoOffers()
     {
-        Dictionary<string, double> pricing = new Dictionary<string, double>();
-        Dictionary<string, int>? items = new Dictionary<string, int>();
-
-        pricing.Add("A", 4);
-        pricing.Add("B", 6);
-        pricing.Add("C", 8.2);
-        
-        items.Add("A", 1);
-        items.Add("B", 1);
-        items.Add("C", 1);
-
         var cart = new List<Item>
         {
             new("A", 4, 1),
@@ -47,20 +33,10 @@ public class Tests
     [Test]
     public void ShouldReturnTotal_WithOneOffers()
     {
-        Dictionary<string, double>? pricing = new Dictionary<string, double>();
         Dictionary<string, Dictionary<int, double>>? offers = new Dictionary<string, Dictionary<int, double>>();
-        Dictionary<string, int>? items = new Dictionary<string, int>();
-        
-        pricing.Add("A", 50);
-        pricing.Add("B", 30);
-        pricing.Add("C", 20);
         
         offers.Add("A", new Dictionary<int, double>(){{3, 130}});
         offers.Add("B", new Dictionary<int, double>(){{2, 45}});
-        
-        items.Add("A", 3);
-        items.Add("B", 2);
-        items.Add("C", 1);
         
         var cart = new List<Item>
         {
@@ -79,20 +55,10 @@ public class Tests
     [Test]
     public void ShouldReturnTotal_WithOneOffers_And_QuantityIsHigherThanOffer()
     {
-        Dictionary<string, double>? pricing = new Dictionary<string, double>();
         Dictionary<string, Dictionary<int, double>>? offers = new Dictionary<string, Dictionary<int, double>>();
-        Dictionary<string, int>? items = new Dictionary<string, int>();
-        
-        pricing.Add("A", 50);
-        pricing.Add("B", 30);
-        pricing.Add("C", 20);
-        
+
         offers.Add("A", new Dictionary<int, double>(){{3, 130}});
         offers.Add("B", new Dictionary<int, double>(){{2, 45}});
-        
-        items.Add("A", 4);
-        items.Add("B", 3);
-        items.Add("C", 2);
         
         var cart = new List<Item>
         {
@@ -111,20 +77,10 @@ public class Tests
     [Test]
     public void ShouldReturnTotal_WithMultipleOffers()
     {
-        Dictionary<string, double>? pricing = new Dictionary<string, double>();
         Dictionary<string, Dictionary<int, double>>? offers = new Dictionary<string, Dictionary<int, double>>();
-        Dictionary<string, int>? items = new Dictionary<string, int>();
-        
-        pricing.Add("A", 50);
-        pricing.Add("B", 30);
-        pricing.Add("C", 20);
-        
+
         offers.Add("A", new Dictionary<int, double>(){{3, 130}, {5, 200}});
         offers.Add("B", new Dictionary<int, double>(){{2, 45}, {4, 65}});
-        
-        items.Add("A", 5);
-        items.Add("B", 3);
-        items.Add("C", 2);
         
         var cart = new List<Item>
         {
