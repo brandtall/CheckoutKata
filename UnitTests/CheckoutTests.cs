@@ -28,8 +28,9 @@ public class Tests
         items.Add("A", 1);
         items.Add("B", 1);
         items.Add("C", 1);
-        
-        
+
+        var item = new Item("A", 4, 1);
+
         var sut = new Checkout(items, pricing, null);
         var total = sut.Total();
         
@@ -111,6 +112,22 @@ public class Tests
         Assert.That(total, Is.EqualTo(200+45+30+40));
     }
     
+}
+
+public class Item
+{
+    public Item(string sku, double price, int quantity)
+    {
+        SKU = sku;
+        Price = price;
+        Quantity = quantity;
+    }
+
+    public string SKU { get; set; }
+    
+    public double Price { get; set; }
+    
+    public int Quantity { get; set; }
 }
 
 public class Checkout
