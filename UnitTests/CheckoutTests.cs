@@ -33,9 +33,9 @@ public class Tests
 
         var cart = new List<Item>
         {
-            new Item("A", 4, 1),
-            new Item("B", 6, 1),
-            new Item("C", 8.2, 1)
+            new("A", 4, 1),
+            new("B", 6, 1),
+            new("C", 8.2, 1)
         };
 
         var sut = new Checkout(null, cart);
@@ -64,9 +64,9 @@ public class Tests
         
         var cart = new List<Item>
         {
-            new Item("A", 50, 3),
-            new Item("B", 30, 2),
-            new Item("C", 20, 1)
+            new("A", 50, 3),
+            new("B", 30, 2),
+            new("C", 20, 1)
         };
         
         var sut = new Checkout(offers, cart);
@@ -96,9 +96,9 @@ public class Tests
         
         var cart = new List<Item>
         {
-            new Item("A", 50, 4),
-            new Item("B", 30, 3),
-            new Item("C", 20, 2)
+            new("A", 50, 4),
+            new("B", 30, 3),
+            new("C", 20, 2)
         };
         
         var sut = new Checkout(offers, cart);
@@ -128,9 +128,9 @@ public class Tests
         
         var cart = new List<Item>
         {
-            new Item("A", 50, 5),
-            new Item("B", 30, 3),
-            new Item("C", 20, 2)
+            new("A", 50, 5),
+            new("B", 30, 3),
+            new("C", 20, 2)
         };
         
         var sut = new Checkout(offers, cart);
