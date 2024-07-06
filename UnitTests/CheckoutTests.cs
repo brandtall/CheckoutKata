@@ -167,12 +167,12 @@ public class Checkout
     {
         if (pricing is null || items is null) return;
         offers ??= new Dictionary<string, Dictionary<int, double>>();
-        
-        foreach (var item in pricing)
-        {
-            var quantity = items[item.Key];
-            CalculateTotal(offers, quantity, item.Value, item.Key);
-        }
+        //
+        // foreach (var item in pricing)
+        // {
+        //     var quantity = items[item.Key];
+        //     CalculateTotal(offers, quantity, item.Value, item.Key);
+        // }
 
         if (cart == null) return;
 
