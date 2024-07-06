@@ -37,12 +37,19 @@ public class Tests
         
         offers.Add("A", new Dictionary<int, double>(){{3, 130}});
         offers.Add("B", new Dictionary<int, double>(){{2, 45}});
+
+        var item1 = new Item("A", 50, 3);
+        var item2 = new Item("B", 30, 2);
+        var item3 = new Item("C", 20, 1);
+
+        new Offer(item1, 3, 130);
+        
         
         var cart = new List<Item>
         {
-            new("A", 50, 3),
-            new("B", 30, 2),
-            new("C", 20, 1)
+            item1,
+            item2,
+            item3
         };
         
         var sut = new Checkout(offers, cart);
@@ -118,6 +125,15 @@ public class Tests
         Assert.That(total, Is.EqualTo(200+200+200+45+65+40));
     }
     
+}
+
+public class Offer(Item item, int quantity, double price)
+{
+    public Item Product { get; set; } = item;
+
+    public int Quantity { get; set; } = quantity;
+
+    public double Price { get; set; } = price;
 }
 
 public class Item(string sku, double price, int quantity)
